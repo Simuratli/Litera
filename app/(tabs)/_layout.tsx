@@ -1,33 +1,50 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { Tabs } from "expo-router";
+import { Text } from "react-native";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
+        tabBarActiveTintColor: "#2C1810",
+        tabBarInactiveTintColor: "#A89880",
+        tabBarStyle: { backgroundColor: "#F5F0E8", borderTopColor: "#D8D0BC" },
+        tabBarLabelStyle: { fontFamily: "" },
+      }}
+    >
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "Home",
+          tabBarIcon: ({ color }) => <Text style={{ color }}>🏠</Text>,
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="search"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "Search",
+          tabBarIcon: ({ color }) => <Text style={{ color }}>🔍</Text>,
+        }}
+      />
+      <Tabs.Screen
+        name="add"
+        options={{
+          title: "Add",
+          tabBarIcon: ({ color }) => <Text style={{ color }}>➕</Text>,
+        }}
+      />
+      <Tabs.Screen
+        name="bookmarks"
+        options={{
+          title: "Saved",
+          tabBarIcon: ({ color }) => <Text style={{ color }}>🔖</Text>,
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color }) => <Text style={{ color }}>👤</Text>,
         }}
       />
     </Tabs>
