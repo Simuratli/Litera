@@ -2,8 +2,22 @@ import "@/global.css";
 import { ClerkProvider } from "@clerk/expo";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
+import * as SecureStore from "expo-secure-store";
 import { useState } from "react";
+import { MenuProvider } from "react-native-popup-menu";
 import SplashScreen from "../components/splash-screen";
+
+const tokenCache = {
+  async getToken(key: string) {
+    return SecureStore.getItemAsync(key);
+  },
+  async saveToken(key: string, value: string) {
+    return SecureStore.setItemAsync(key, value);
+  },
+  async clearToken(key: string) {
+    return SecureStore.deleteItemAsync(key);
+  },
+};
 
 export default function RootLayout() {
   const [ready, setReady] = useState(false);
@@ -31,8 +45,10 @@ export default function RootLayout() {
   if (!fontsLoaded) return null;
 
   return (
-    <ClerkProvider publishableKey={publishableKey}>
-      <Stack screenOptions={{ headerShown: false }} />
+    <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
+      <MenuProvider>
+        <Stack screenOptions={{ headerShown: false }} />
+      </MenuProvider>
     </ClerkProvider>
   );
 }

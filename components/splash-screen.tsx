@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
 import {
-    Animated,
-    ImageBackground,
-    StyleSheet,
-    Text,
-    View,
+  Animated,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
 } from "react-native";
 
 interface Props {
